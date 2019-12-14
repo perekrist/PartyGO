@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:layout_width="wrap_content"
-    android:padding="20dp"
+    android:layout_width="327dp"
     android:layout_margin="5dp"
-    android:layout_height="wrap_content"
-    android:background="@color/adapterColor">
+    android:layout_height="256dp">
 
     <ImageView
         android:id="@+id/image"
+        android:scaleType="centerCrop"
+        android:layout_gravity="center"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher_foreground"/>
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/text"
+        android:textSize="20sp"
+        android:layout_gravity="center|top"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:text="Sample Adapter"/>
 
-</LinearLayout>
+</androidx.cardview.widget.CardView>

@@ -17,7 +17,8 @@ import com.example.partygo.R
 
 class SampleAdapter(
     private val mContext: Context,
-    private val names: ArrayList<String>
+    private val names: ArrayList<String>,
+    private  val images: ArrayList<Int>
 ) : RecyclerView.Adapter<SampleAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,7 +31,7 @@ class SampleAdapter(
         Log.d(TAG, "onBindViewHolder: called.")
 
 //        holder.image = BitmapFactory.decodeResource(mContext.resources ,R.drawable.lhd) as ImageView
-        holder.image.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.lhd))
+        holder.image.setImageDrawable(ContextCompat.getDrawable(mContext, images[position]))
         holder.name.text = names[position]
 
         holder.image.setOnClickListener {
