@@ -1,5 +1,5 @@
 package com.example.partygo
 
-import com.example.partygo.User
-
-val user1= User("Sveta")
+var interests =
+    arrayListOf("Music", "Hip-Hop", "Football", "Dance", "Thriller", "Comedy", "Adventure")
+var user1 = User("Sveta Polijuke", "Tomsk", interests)
