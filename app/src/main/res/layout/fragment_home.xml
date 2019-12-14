@@ -21,10 +21,11 @@
                 android:textStyle="bold"
                 android:textSize="20sp"/>
 
-            <com.pramonow.horizontallistbundler.HorizontalListBundler
+            <androidx.recyclerview.widget.RecyclerView
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/horizontal_bundler"/>
+                android:id="@+id/horizontal_rv"/>
         </LinearLayout>
 
     </ScrollView>

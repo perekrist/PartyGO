@@ -11,22 +11,14 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import com.example.partygo.R
 
 
 class SampleAdapter(
     private val mContext: Context,
-    names: ArrayList<String>,
-    images: ArrayList<Bitmap>
+    private val names: ArrayList<String>
 ) : RecyclerView.Adapter<SampleAdapter.ViewHolder>() {
-
-    private var mNames: ArrayList<String> = arrayListOf()
-    private var mImages: ArrayList<Bitmap> = arrayListOf()
-
-    init {
-        mNames = names
-        mImages = images
-    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view =
@@ -37,22 +29,18 @@ class SampleAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Log.d(TAG, "onBindViewHolder: called.")
 
-        holder.image = BitmapFactory.decodeResource(mContext.resources ,R.drawable.lhd) as ImageView
-//        Glide.with(mContext)
-//            .asBitmap()
-//            .load(mImageUrls[position])
-//            .into(holder.image)
-
-        holder.name.text = mNames[position]
+//        holder.image = BitmapFactory.decodeResource(mContext.resources ,R.drawable.lhd) as ImageView
+        holder.image.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.lhd))
+        holder.name.text = names[position]
 
         holder.image.setOnClickListener {
-            Log.d(TAG, "onClick: clicked on an image: " + mNames[position])
-            Toast.makeText(mContext, mNames[position], Toast.LENGTH_SHORT).show()
+            Log.d(TAG, "onClick: clicked on an image: " + names[position])
+            Toast.makeText(mContext, names[position], Toast.LENGTH_SHORT).show()
         }
     }
 
     override fun getItemCount(): Int {
-        return mImages.size
+        return names.size
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
