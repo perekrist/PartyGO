@@ -22,7 +22,7 @@ class HomeFragment : Fragment() {
         val rv = root.findViewById(R.id.horizontal_rv) as RecyclerView
         rv.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.HORIZONTAL, false)
 
-        val rv2 = root.findViewById(R.id.horizontal_rv) as RecyclerView
+        val rv2 = root.findViewById(R.id.horizontal_rv_2) as RecyclerView
         rv2.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.HORIZONTAL, false)
 
         val adapter = SampleAdapter(this.context!!, events)
