@@ -25,9 +25,13 @@ class HomeFragment : Fragment() {
         val rv2 = root.findViewById(R.id.horizontal_rv_2) as RecyclerView
         rv2.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.HORIZONTAL, false)
 
-        val adapter = SampleAdapter(this.context!!, events)
-        rv.adapter = adapter
-        rv2.adapter = adapter
+        val rv3 = root.findViewById(R.id.rv_3) as RecyclerView
+        rv3.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.VERTICAL, false)
+
+        rv.adapter = SampleAdapter(this.context!!, events)
+        rv2.adapter = SampleAdapter(this.context!!, events)
+
+        rv3.adapter = AdapterUpcoming(this.context!!, events)
 
         return root
     }
