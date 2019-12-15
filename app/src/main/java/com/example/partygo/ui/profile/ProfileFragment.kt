@@ -15,26 +15,28 @@ import com.example.partygo.events
 import com.example.partygo.user1
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 
 class ProfileFragment : Fragment() {
-
-    private lateinit var profileViewModel: ProfileViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        profileViewModel =
-            ViewModelProviders.of(this).get(ProfileViewModel::class.java)
-        val root = inflater.inflate(com.example.partygo.R.layout.fragment_profile, container, false)
-        val rv = root.findViewById(R.id.rv_profile) as RecyclerView
-        rv.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.VERTICAL, false)
-        val name: TextView = root.findViewById(com.example.partygo.R.id.text_name)
-        val city: TextView = root.findViewById(com.example.partygo.R.id.text_city)
-        val chipGroup: ChipGroup = root.findViewById(com.example.partygo.R.id.chipGroup)
-        var image: ImageView = root.findViewById(com.example.partygo.R.id.imageView2)
+        val root = inflater.inflate(R.layout.fragment_profile, container, false)
+        return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        rv_profile.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.VERTICAL, false)
+        val name: TextView = view.findViewById(R.id.text_name)
+        val city: TextView = view.findViewById(R.id.text_city)
+        val chipGroup: ChipGroup = view.findViewById(R.id.chipGroup)
+        val image: ImageView = view.findViewById(R.id.imageView2)
         for (i in user1.Interests) {
             val chip = Chip(context)
             chip.text = i
@@ -43,7 +45,6 @@ class ProfileFragment : Fragment() {
         name.text = user1.Name
         city.text = user1.City
         image.setImageDrawable(androidx.core.content.ContextCompat.getDrawable(context!!, user1.Image))
-        rv.adapter = AdapterProfile(this.context!!, events)
-        return root
+        rv_profile.adapter = AdapterProfile(this.context!!, events)
     }
 }

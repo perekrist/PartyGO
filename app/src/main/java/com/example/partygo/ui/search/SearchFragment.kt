@@ -4,37 +4,48 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import com.example.partygo.Event
 import com.example.partygo.R
 import com.example.partygo.events
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.*
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.android.synthetic.main.fragment_search.*
+import android.graphics.Bitmap
+import androidx.core.content.ContextCompat
+import com.google.android.gms.maps.model.BitmapDescriptor
+import android.content.Context
+import android.graphics.Canvas
 
-class SearchFragment : Fragment(), OnMapReadyCallback,  GoogleMap.OnMarkerClickListener {
+
+class SearchFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+
     override fun onMarkerClick(p0: Marker?): Boolean {
-        return false
+        return true
     }
 
     private lateinit var mMap: GoogleMap
 
-    override fun onMapReady(googleMap: GoogleMap) {
-        mMap = googleMap
-        val place = LatLng(40.73, -73.99)
-        mMap.addMarker(MarkerOptions().position(place))
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(place, 12.0f))
-
-        println("hello")
-        for (i in events) {
-            addMark(i.lat, i.lng)
-            println(i.lat)
-        }
+    private fun bitmapDescriptorFromVector(context: Context, vectorResId: Int): BitmapDescriptor {
+        val vectorDrawable = ContextCompat.getDrawable(context, vectorResId)
+        vectorDrawable!!.setBounds(
+            0,
+            0,
+            vectorDrawable.intrinsicWidth,
+            vectorDrawable.intrinsicHeight
+        )
+        val bitmap = Bitmap.createBitmap(
+            vectorDrawable.intrinsicWidth,
+            vectorDrawable.intrinsicHeight,
+            Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(bitmap)
+        vectorDrawable.draw(canvas)
+        return BitmapDescriptorFactory.fromBitmap(bitmap)
     }
 
     override fun onCreateView(
@@ -43,13 +54,82 @@ class SearchFragment : Fragment(), OnMapReadyCallback,  GoogleMap.OnMarkerClickL
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_search, container, false)
-
         return root
     }
 
-    private fun addMark(lat: Double, lng: Double) {
-        val place = LatLng(lat, lng)
-        mMap.addMarker(MarkerOptions().position(place))
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val mapView = view.findViewById(R.id.map) as MapView
+        mapView.onCreate(savedInstanceState)
+        mapView.onResume()
+        mapView.getMapAsync(this)
+
+        search_bar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                mMap.clear()
+                val regex = Regex(query)
+                val currentEvents = events.filter {
+                    it.name.contains(regex)
+                    it.type.contains(regex)
+                }
+                for (i in currentEvents) {
+                    addMark(i)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(query: String): Boolean {
+                mMap.clear()
+                val regex = Regex(query)
+                val currentEvents = events.filter {
+                    it.name.contains(regex)
+                    it.type.contains(regex)
+                }
+                for (i in currentEvents) {
+                    addMark(i)
+                }
+                return true
+            }
+        })
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        mMap = googleMap
+        for (i in events) {
+            addMark(i)
+        }
+    }
+
+
+    private fun addMark(i: Event) {
+        val place = LatLng(i.lat, i.lng)
+        when {
+            i.type == "education" -> {
+                mMap.addMarker(
+                    MarkerOptions()
+                        .position(place)
+                        .icon(bitmapDescriptorFromVector(requireContext(), R.drawable.map))
+                        .title(i.name)
+                )
+            }
+            i.type == "music" -> {
+                mMap.addMarker(
+                    MarkerOptions()
+                        .position(place)
+                        .icon(bitmapDescriptorFromVector(requireContext(), R.drawable.music))
+                        .title(i.name)
+                )
+            }
+            i.type == "dance" -> {
+                mMap.addMarker(
+                    MarkerOptions()
+                        .position(place)
+                        .icon(bitmapDescriptorFromVector(requireContext(), R.drawable.sport))
+                        .title(i.name)
+                )
+            }
+        }
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(place, 12.0f))
 
     }
