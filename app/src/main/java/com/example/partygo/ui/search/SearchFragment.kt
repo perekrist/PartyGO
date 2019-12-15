@@ -5,15 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import com.example.partygo.Event
 import com.example.partygo.R
 import com.example.partygo.events
 import com.google.android.gms.maps.*
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.android.synthetic.main.fragment_search.*
+import android.graphics.Bitmap
+import androidx.core.content.ContextCompat
+import com.google.android.gms.maps.model.BitmapDescriptor
+import android.content.Context
+import android.graphics.Canvas
 
 
 class SearchFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -23,6 +29,24 @@ class SearchFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
     }
 
     private lateinit var mMap: GoogleMap
+
+    private fun bitmapDescriptorFromVector(context: Context, vectorResId: Int): BitmapDescriptor {
+        val vectorDrawable = ContextCompat.getDrawable(context, vectorResId)
+        vectorDrawable!!.setBounds(
+            0,
+            0,
+            vectorDrawable.intrinsicWidth,
+            vectorDrawable.intrinsicHeight
+        )
+        val bitmap = Bitmap.createBitmap(
+            vectorDrawable.intrinsicWidth,
+            vectorDrawable.intrinsicHeight,
+            Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(bitmap)
+        vectorDrawable.draw(canvas)
+        return BitmapDescriptorFactory.fromBitmap(bitmap)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,15 +65,16 @@ class SearchFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
         mapView.onResume()
         mapView.getMapAsync(this)
 
-        search_bar.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        search_bar.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 mMap.clear()
                 val regex = Regex(query)
                 val currentEvents = events.filter {
                     it.name.contains(regex)
+                    it.type.contains(regex)
                 }
-                for (i in currentEvents){
-                    addMark(i.lat, i.lng, i.name)
+                for (i in currentEvents) {
+                    addMark(i)
                 }
                 return true
             }
@@ -59,9 +84,10 @@ class SearchFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
                 val regex = Regex(query)
                 val currentEvents = events.filter {
                     it.name.contains(regex)
+                    it.type.contains(regex)
                 }
-                for (i in currentEvents){
-                    addMark(i.lat, i.lng, i.name)
+                for (i in currentEvents) {
+                    addMark(i)
                 }
                 return true
             }
@@ -71,15 +97,39 @@ class SearchFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         for (i in events) {
-            addMark(i.lat, i.lng, i.name)
+            addMark(i)
         }
     }
 
 
-
-    private fun addMark(lat: Double, lng: Double, title: String) {
-        val place = LatLng(lat, lng)
-        mMap.addMarker(MarkerOptions().position(place).title(title))
+    private fun addMark(i: Event) {
+        val place = LatLng(i.lat, i.lng)
+        when {
+            i.type == "education" -> {
+                mMap.addMarker(
+                    MarkerOptions()
+                        .position(place)
+                        .icon(bitmapDescriptorFromVector(requireContext(), R.drawable.map))
+                        .title(i.name)
+                )
+            }
+            i.type == "music" -> {
+                mMap.addMarker(
+                    MarkerOptions()
+                        .position(place)
+                        .icon(bitmapDescriptorFromVector(requireContext(), R.drawable.music))
+                        .title(i.name)
+                )
+            }
+            i.type == "dance" -> {
+                mMap.addMarker(
+                    MarkerOptions()
+                        .position(place)
+                        .icon(bitmapDescriptorFromVector(requireContext(), R.drawable.sport))
+                        .title(i.name)
+                )
+            }
+        }
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(place, 12.0f))
 
     }
