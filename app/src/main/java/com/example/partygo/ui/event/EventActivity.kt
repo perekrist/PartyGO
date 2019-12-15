@@ -34,7 +34,7 @@ class EventActivity : AppCompatActivity() {
             if (!bought) {
                 tickets.add(id)
             }
-            println(tickets)
+            finish()
         }
     }
 }
