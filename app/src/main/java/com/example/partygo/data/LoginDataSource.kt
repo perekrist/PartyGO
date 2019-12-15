@@ -3,9 +3,6 @@ package com.example.partygo.data
 import com.example.partygo.User
 import java.io.IOException
 
-/**
- * Class that handles authentication w/ login credentials and retrieves user information.
- */
 class LoginDataSource {
 
     fun login(username: String, password: String): Result<User> {

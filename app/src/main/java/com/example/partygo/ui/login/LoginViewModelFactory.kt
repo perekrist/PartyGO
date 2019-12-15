@@ -5,10 +5,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.partygo.data.LoginDataSource
 import com.example.partygo.data.LoginRepository
 
-/**
- * ViewModel provider factory to instantiate LoginViewModel.
- * Required given LoginViewModel has a non-empty constructor
- */
 class LoginViewModelFactory : ViewModelProvider.Factory {
 
     @Suppress("UNCHECKED_CAST")
