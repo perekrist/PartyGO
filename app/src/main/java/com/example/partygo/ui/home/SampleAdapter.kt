@@ -28,7 +28,7 @@ class SampleAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         Log.d(TAG, "onBindViewHolder: called.")
 
-        holder.image.setImageDrawable(ContextCompat.getDrawable(mContext, events[position].image))
+        //holder.image.setImageDrawable(ContextCompat.getDrawable(mContext, events[position].image))
         holder.name.text = events[position].name
 
         holder.image.setOnClickListener {
