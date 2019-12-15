@@ -38,7 +38,7 @@ class AdapterProfile(
         val currentDate = "$a ${day.format(Date()).toInt()+1+position}"
 
         holder.date.text = currentDate
-        //holder.image.setImageDrawable(ContextCompat.getDrawable(mContext, events[position].image))
+        holder.image.setImageDrawable(ContextCompat.getDrawable(mContext, events[position].image))
         holder.name.text = events[position].name
         holder.type.text = "Event"
         //holder.count.text = "${events.size} more events"

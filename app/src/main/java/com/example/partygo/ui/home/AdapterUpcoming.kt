@@ -38,7 +38,7 @@ class AdapterUpcoming(
         val currentDate = "$a\n${day.format(Date()).toInt()+1+position}"
 
         holder.date.text = currentDate
-        //holder.image.setImageDrawable(ContextCompat.getDrawable(mContext, events[position].image))
+        holder.image.setImageDrawable(ContextCompat.getDrawable(mContext, events[position].image))
         holder.name.text = events[position].name
         holder.count.text = "${events.size} more events"
 
