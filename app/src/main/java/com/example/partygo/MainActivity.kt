@@ -7,6 +7,8 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import org.json.JSONObject
+import org.json.JSONStringer
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,9 +26,33 @@ class MainActivity : AppCompatActivity() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
+
+
         val service = retrofit.create(EventAPI::class.java)
 
-        val request = service.getCatFacts()
+        //val request = service.getCatFacts()
+        val request = service.getEvent()
+
+//        request.enqueue(object : Callback<EventResponse> {
+//            override fun onFailure(call: Call<EventResponse>, t: Throwable) {
+//                println(t)
+//                println("sfaile")
+//            }
+//
+//            override fun onResponse(call: Call<EventResponse>, response: Response<EventResponse>) {
+//                println(response.body())
+//
+//                val body = response.body()
+//                if(body != null) {
+//                    println("sucs")
+//                    println(body)
+//                    println("suce")
+//
+//
+//                }
+//            }
+//
+//        })
 
         request.enqueue(object : Callback<EventResponse> {
             override fun onFailure(call: Call<EventResponse>, t: Throwable) {
