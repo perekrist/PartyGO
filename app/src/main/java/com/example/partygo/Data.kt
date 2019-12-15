@@ -5,3 +5,4 @@ var interests =
 var user1 = User("Sveta Polijuke", "Tomsk", interests, R.drawable.profile_photo)
 
 var tickets: ArrayList<Int> = arrayListOf()
+var evenickets: ArrayList<Event> = arrayListOf()

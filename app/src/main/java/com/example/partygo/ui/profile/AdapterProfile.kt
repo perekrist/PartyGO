@@ -32,32 +32,20 @@ class AdapterProfile(
     override fun onBindViewHolder(holder: ViewHolderProfile, position: Int) {
         Log.d(TAG, "onBindViewHolder: called.")
 
-        val day = SimpleDateFormat("dd")
-        val month = SimpleDateFormat("M")
-        var a: String
-        a = if (month.format(Date()) == "12") {
-            "Dec"
-        } else month.format(Date())
-        //TODO() all months display correctly
-        val currentDate = "$a ${day.format(Date()).toInt()+1+position}"
-
-        holder.date.text = currentDate
+        holder.date.text = events[position].date
         holder.image.setImageDrawable(ContextCompat.getDrawable(mContext, events[position].image))
         holder.name.text = events[position].name
-        holder.type.text = "Event"
+        holder.type.text = events[position].type
         holder.card.setOnClickListener {
             Log.d(TAG, "onClick: clicked on an image: " + events[position].name)
-            //Toast.makeText(mContext, events[position].name, Toast.LENGTH_SHORT).show()
             val intent = Intent(mContext, EventActivity::class.java)
             intent.putExtra("id", position.toString())
             ContextCompat.startActivity(mContext, intent, null)
         }
-        //holder.count.text = "${events.size} more events"
 
     }
 
     override fun getItemCount(): Int {
-        //return minOf(events.size,2)
         return events.size
     }
 
@@ -67,7 +55,6 @@ class AdapterProfile(
         internal var name: TextView
         internal var type: TextView
         internal var image_count: ImageView
-        //internal var count: TextView
         internal var card: CardView
 
         init {
@@ -76,7 +63,6 @@ class AdapterProfile(
             name = itemView.findViewById(R.id.name)
             type = itemView.findViewById(R.id.type)
             image_count = itemView.findViewById(R.id.image_upcoming)
-            //count = itemView.findViewById(R.id.count_of_more_events)
             card = itemView.findViewById(R.id.cardVisited)
         }
     }

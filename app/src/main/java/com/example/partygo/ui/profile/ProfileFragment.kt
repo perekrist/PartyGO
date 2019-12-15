@@ -10,12 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.partygo.R
-import com.example.partygo.events
-import com.example.partygo.user1
+import com.example.partygo.*
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import kotlinx.android.synthetic.main.fragment_profile.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class ProfileFragment : Fragment() {
@@ -32,6 +33,18 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val day = SimpleDateFormat("dd")
+
+        var eventVisited: ArrayList<Event> = arrayListOf()
+        for (i in evenickets) {
+            var date = i.date.substring(0, 2)
+            println(date.toInt())
+            println(day.format(Date()).toInt())
+            if (date.toInt() <= day.format(Date()).toInt()) {
+                eventVisited.add(i)
+            }
+        }
+
         rv_profile.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.VERTICAL, false)
         val name: TextView = view.findViewById(R.id.text_name)
         val city: TextView = view.findViewById(R.id.text_city)
@@ -45,6 +58,6 @@ class ProfileFragment : Fragment() {
         name.text = user1.Name
         city.text = user1.City
         image.setImageDrawable(androidx.core.content.ContextCompat.getDrawable(context!!, user1.Image))
-        rv_profile.adapter = AdapterProfile(this.context!!, events)
+        rv_profile.adapter = AdapterProfile(this.context!!, eventVisited)
     }
 }

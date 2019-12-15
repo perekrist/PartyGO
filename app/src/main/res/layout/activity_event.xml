@@ -33,43 +33,65 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/photo" />
 
-            <TextView
-                android:id="@+id/name"
+            <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:text="LHD"
-                android:textColor="@android:color/primary_text_dark"
-                android:textSize="30sp"
-                android:textStyle="bold"
+                android:orientation="vertical"
+                android:padding="20dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView">
 
-            <TextView
-                android:id="@+id/date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:text="dec 15"
-                android:textColor="@android:color/primary_text_dark_nodisable"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/name" />
+                <TextView
+                    android:id="@+id/name"
+                    android:text="LHD"
+                    android:textSize="45sp"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <TextView
+                    android:id="@+id/date"
+                    android:text="LHD"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <TextView
+                    android:id="@+id/cost"
+                    android:text="LHD"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <TextView
+                    android:id="@+id/type"
+                    android:text="LHD"
+                    android:textSize="20sp"
+                    android:textColor="@color/colorAccent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+            </LinearLayout>
+
 
             <Button
                 android:id="@+id/buy_ticket"
                 android:layout_width="200dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
                 android:text="Buy ticket"
-                android:textSize="16sp"
                 android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/date" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

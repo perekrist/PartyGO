@@ -21,11 +21,14 @@ class EventActivity : AppCompatActivity() {
         var event = events[id]
 
         name.text = event.name
+        date.text = event.date
+        cost.text = event.cost
+        type.text = event.type
         imageView.setImageDrawable(ContextCompat.getDrawable(this, event.image))
+
 
         var bought = false
         buy_ticket.setOnClickListener {
-            Toast.makeText(this, "clicked", Toast.LENGTH_SHORT).show()
             for (i in tickets) {
                 if (i == id) {
                     bought = true
@@ -33,7 +36,9 @@ class EventActivity : AppCompatActivity() {
             }
             if (!bought) {
                 tickets.add(id)
-            }
+                Toast.makeText(this, "Ticket purchased successfully", Toast.LENGTH_SHORT).show()
+            } else
+                Toast.makeText(this, "You have already bought a ticket", Toast.LENGTH_SHORT).show()
             finish()
         }
     }

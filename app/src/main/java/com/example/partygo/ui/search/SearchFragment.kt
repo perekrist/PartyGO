@@ -19,12 +19,19 @@ import android.graphics.Bitmap
 import androidx.core.content.ContextCompat
 import com.google.android.gms.maps.model.BitmapDescriptor
 import android.content.Context
+import android.content.Intent
 import android.graphics.Canvas
+import android.widget.Toast
+import com.example.partygo.ui.event.EventActivity
 
 
 class SearchFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     override fun onMarkerClick(p0: Marker?): Boolean {
+        val intent = Intent(this.activity, EventActivity::class.java)
+        intent.putExtra("id", p0.toString())
+        ContextCompat.startActivity(this.requireContext(), intent, null)
+        Toast.makeText(this.requireContext(), "$p0 q", Toast.LENGTH_SHORT).show()
         return true
     }
 
@@ -120,7 +127,7 @@ class SearchFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
                         .title(i.name)
                 )
             }
-            i.type == "dance" -> {
+            i.type == "sport" -> {
                 mMap.addMarker(
                     MarkerOptions()
                         .position(place)

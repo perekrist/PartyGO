@@ -8,7 +8,6 @@
         android:id="@+id/placeholder"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:visibility="visible"
         android:scaleType="centerCrop"
         android:src="@drawable/placeholder_tickets"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,7 +19,7 @@
         android:id="@+id/rv_tickets"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="@color/searchBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
