@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.fragment_search.*
 class SearchFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     override fun onMarkerClick(p0: Marker?): Boolean {
+        println(p0)
         return true
     }
 
