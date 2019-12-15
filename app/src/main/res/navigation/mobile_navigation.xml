@@ -19,15 +19,15 @@
 
     <fragment
         android:id="@+id/navigation_chat"
-        android:name="com.example.partygo.ui.notifications.NotificationsFragment"
+        android:name="com.example.partygo.ui.tickets.TicketsFragment"
         android:label="@string/title_chat"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_tickets" />
 
     <fragment
         android:id="@+id/navigation_ticket"
-        android:name="com.example.partygo.ui.notifications.NotificationsFragment"
+        android:name="com.example.partygo.ui.tickets.TicketsFragment"
         android:label="@string/title_ticket"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_tickets" />
 
     <fragment
         android:id="@+id/navigation_profile"
