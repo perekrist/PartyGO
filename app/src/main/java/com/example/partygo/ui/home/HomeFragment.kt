@@ -18,7 +18,7 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root = inflater.inflate(R.layout.fragment_home, container, false)
-
+//
         val rv = root.findViewById(R.id.horizontal_rv) as RecyclerView
         rv.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.HORIZONTAL, false)
 
