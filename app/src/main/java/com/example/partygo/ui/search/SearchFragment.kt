@@ -96,6 +96,7 @@ class SearchFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        mMap.uiSettings.isCompassEnabled = false
         for (i in events) {
             addMark(i)
         }

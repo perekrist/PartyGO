@@ -1,6 +1,7 @@
 package com.example.partygo.ui.home
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,8 +11,10 @@ import androidx.recyclerview.widget.RecyclerView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.startActivity
 import com.example.partygo.Event
 import com.example.partygo.R
+import com.example.partygo.ui.event.EventActivity
 
 
 class SampleAdapter(
@@ -33,9 +36,12 @@ class SampleAdapter(
 
         holder.image.setOnClickListener {
             Log.d(TAG, "onClick: clicked on an image: " + events[position].name)
-            Toast.makeText(mContext, events[position].name, Toast.LENGTH_SHORT).show()
-
+            //Toast.makeText(mContext, events[position].name, Toast.LENGTH_SHORT).show()
+            val intent = Intent(mContext, EventActivity::class.java)
+            intent.putExtra("id", position.toString())
+            startActivity(mContext, intent, null)
         }
+
     }
 
     override fun getItemCount(): Int {
