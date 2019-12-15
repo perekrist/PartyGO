@@ -70,8 +70,7 @@ class SearchFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
                 mMap.clear()
                 val regex = Regex(query)
                 val currentEvents = events.filter {
-                    it.name.contains(regex)
-                    it.type.contains(regex)
+                    it.name.contains(regex) || it.type.contains(regex)
                 }
                 for (i in currentEvents) {
                     addMark(i)
@@ -83,8 +82,7 @@ class SearchFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
                 mMap.clear()
                 val regex = Regex(query)
                 val currentEvents = events.filter {
-                    it.name.contains(regex)
-                    it.type.contains(regex)
+                    it.name.contains(regex) || it.type.contains(regex)
                 }
                 for (i in currentEvents) {
                     addMark(i)

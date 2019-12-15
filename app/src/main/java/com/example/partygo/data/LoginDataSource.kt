@@ -1,6 +1,6 @@
 package com.example.partygo.data
 
-import com.example.partygo.data.model.LoggedInUser
+import com.example.partygo.User
 import java.io.IOException
 
 /**
@@ -8,11 +8,11 @@ import java.io.IOException
  */
 class LoginDataSource {
 
-    fun login(username: String, password: String): Result<LoggedInUser> {
+    fun login(username: String, password: String): Result<User> {
         try {
             // TODO: handle loggedInUser authentication
-            val fakeUser = LoggedInUser(java.util.UUID.randomUUID().toString(), "Jane Doe")
-            return Result.Success(fakeUser)
+            val newUser = User(username, "", arrayListOf(), 0)
+            return Result.Success(newUser)
         } catch (e: Throwable) {
             return Result.Error(IOException("Error logging in", e))
         }
