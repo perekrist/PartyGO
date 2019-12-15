@@ -5,4 +5,6 @@
     <color name="colorAccent">#FFFFFF</color>
     <color name="adapterColor">#6F6F6F</color>
     <color name="searchBar">#80FFFFFF</color>
+    <color name="gradient_start">#E6524DE9</color>
+    <color name="gradient_end">#00FFFFFF</color>
 </resources>
