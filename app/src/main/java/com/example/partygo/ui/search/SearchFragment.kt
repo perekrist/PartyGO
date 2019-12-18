@@ -24,14 +24,9 @@ import android.graphics.Canvas
 import android.widget.Toast
 import com.example.partygo.ui.event.EventActivity
 
-
 class SearchFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
-    override fun onMarkerClick(p0: Marker?): Boolean {
-        val intent = Intent(this.activity, EventActivity::class.java)
-        intent.putExtra("id", p0.toString())
-        ContextCompat.startActivity(this.requireContext(), intent, null)
-        Toast.makeText(this.requireContext(), "$p0 q", Toast.LENGTH_SHORT).show()
+    override fun onMarkerClick(marker: Marker?): Boolean {
         return true
     }
 
@@ -105,6 +100,18 @@ class SearchFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
         for (i in events) {
             addMark(i)
         }
+        mMap.setOnInfoWindowClickListener {
+            var tag = 0
+            for (i in events) {
+                if (it.title == i.name) {
+                    tag = i.id
+                }
+            }
+            val intent = Intent(this.activity, EventActivity::class.java)
+            intent.putExtra("id", "$tag")
+            ContextCompat.startActivity(this.requireContext(), intent, null)
+        }
+
     }
 
 
