@@ -7,4 +7,5 @@
     <color name="searchBar">#80FFFFFF</color>
     <color name="gradient_start">#E6524DE9</color>
     <color name="gradient_end">#00FFFFFF</color>
+    <color name="loginBack">#66FFFFFF</color>
 </resources>
