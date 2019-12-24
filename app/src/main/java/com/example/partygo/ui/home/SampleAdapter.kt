@@ -35,8 +35,6 @@ class SampleAdapter(
         holder.name.text = events[position].name
 
         holder.image.setOnClickListener {
-            Log.d(TAG, "onClick: clicked on an image: " + events[position].name)
-            //Toast.makeText(mContext, events[position].name, Toast.LENGTH_SHORT).show()
             val intent = Intent(mContext, EventActivity::class.java)
             intent.putExtra("id", position.toString())
             startActivity(mContext, intent, null)

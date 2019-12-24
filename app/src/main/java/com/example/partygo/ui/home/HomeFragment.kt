@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.partygo.R
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.partygo.Event
 import com.example.partygo.events
 
 
@@ -28,10 +29,11 @@ class HomeFragment : Fragment() {
         val rv3 = root.findViewById(R.id.rv_3) as RecyclerView
         rv3.layoutManager = LinearLayoutManager(this.activity, LinearLayoutManager.VERTICAL, false)
 
-        rv.adapter = SampleAdapter(this.context!!, events)
-        rv2.adapter = SampleAdapter(this.context!!, events)
+        rv.adapter = SampleAdapter(this.context!!, arrayListOf(events[0], events[2], events[3]))
+        rv2.adapter = SampleAdapter(this.context!!, arrayListOf(events[0], events[1], events[3]))
 
-        rv3.adapter = AdapterUpcoming(this.context!!, events)
+        println(events.sortBy { it.date })
+        rv3.adapter = AdapterUpcoming(this.context!!, arrayListOf(events[0], events[1], events[2]))
 
         return root
     }

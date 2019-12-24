@@ -7,9 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.partygo.*
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -50,14 +48,14 @@ class ProfileFragment : Fragment() {
         val city: TextView = view.findViewById(R.id.text_city)
         val chipGroup: ChipGroup = view.findViewById(R.id.chipGroup)
         val image: ImageView = view.findViewById(R.id.imageView2)
-        for (i in user1.Interests) {
+        for (i in currentUser!!.Interests) {
             val chip = Chip(context)
             chip.text = i
             chipGroup.addView(chip)
         }
-        name.text = user1.Name
-        city.text = user1.City
-        image.setImageDrawable(androidx.core.content.ContextCompat.getDrawable(context!!, user1.Image))
+        name.text = currentUser!!.Name
+        city.text = currentUser!!.City
+        image.setImageDrawable(androidx.core.content.ContextCompat.getDrawable(context!!, currentUser!!.Image))
         rv_profile.adapter = AdapterProfile(this.context!!, eventVisited)
     }
 }

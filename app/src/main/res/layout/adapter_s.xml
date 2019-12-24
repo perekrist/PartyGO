@@ -56,7 +56,7 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginBottom="16dp"
                     android:text="LHD"
-                    android:textSize="30sp"
+                    android:textSize="25sp"
                     app:layout_constraintBottom_toBottomOf="@+id/image_upcoming"
                     app:layout_constraintStart_toStartOf="parent" />
 
@@ -80,7 +80,7 @@
                     android:id="@+id/image_count_upcoming"
                     android:layout_width="287dp"
                     android:layout_height="40dp"
-                    android:background="@color/adapterColor"
+                    android:background="@color/gradient_start"
                     android:scaleType="centerCrop"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -92,6 +92,7 @@
                     android:layout_marginStart="16dp"
                     android:text="3 more events"
                     android:textSize="20sp"
+                    android:textColor="@color/white"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

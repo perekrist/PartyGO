@@ -25,7 +25,6 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.partygo.ui.event.EventActivity
-import kotlinx.android.synthetic.main.add_event.*
 
 
 class SearchFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
@@ -124,56 +123,36 @@ class SearchFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
     private fun addEvent(latlng: LatLng) {
         val builder = AlertDialog.Builder(this.context!!)
         builder.setTitle("Add new event?")
-        builder.setView(R.layout.add_event)
+        val dialogLayout = layoutInflater.inflate(R.layout.add_event, null)
+        val eventName = dialogLayout.findViewById<EditText>(R.id.event_name)
+        val eventType = dialogLayout.findViewById<EditText>(R.id.event_type)
+        val eventDate = dialogLayout.findViewById<EditText>(R.id.event_date)
+        val eventTime = dialogLayout.findViewById<EditText>(R.id.event_time)
+        val eventCost = dialogLayout.findViewById<EditText>(R.id.event_cost)
+        builder.setView(dialogLayout)
         builder.setPositiveButton(android.R.string.yes) { _, _ ->
-//            events.add(
-//                Event(
-//                    events.size,
-//                    event_name.text.toString(),
-//                    latlng.latitude,
-//                    latlng.longitude,
-//                    event_type.text.toString(),
-//                    event_date.text.toString(),
-//                    event_time.text.toString(),
-//                    event_cost.text.toString(),
-//                    0
-//                )
-//            )
-//            addMark(events[events.size - 1])
 
             events.add(
                 Event(
                     events.size,
-                    "hel[",
+                    eventName.text.toString(),
                     latlng.latitude,
                     latlng.longitude,
-                    "sport",
-                    "12.12.2019",
-                    "22.00",
-                    "1000000$",
-                    R.drawable.lhd
+                    eventType.text.toString(),
+                    eventDate.text.toString(),
+                    eventTime.text.toString(),
+                    eventCost.text.toString(),
+                    R.drawable.default_img
                 )
             )
             addMark(events[events.size - 1])
-
         }
-        builder.setNegativeButton(android.R.string.no) { dialog, which ->
-        }
-        val dialog: AlertDialog = builder.create()
-        dialog.show()
+        builder.show()
     }
 
     private fun addMark(i: Event) {
         val place = LatLng(i.lat, i.lng)
         when {
-            i.type == "education" -> {
-                mMap.addMarker(
-                    MarkerOptions()
-                        .position(place)
-                        .icon(bitmapDescriptorFromVector(requireContext(), R.drawable.map))
-                        .title(i.name)
-                )
-            }
             i.type == "music" -> {
                 mMap.addMarker(
                     MarkerOptions()
@@ -187,6 +166,14 @@ class SearchFragment : Fragment(), OnMapReadyCallback, GoogleMap.OnMarkerClickLi
                     MarkerOptions()
                         .position(place)
                         .icon(bitmapDescriptorFromVector(requireContext(), R.drawable.sport))
+                        .title(i.name)
+                )
+            }
+            else -> {
+                mMap.addMarker(
+                    MarkerOptions()
+                        .position(place)
+                        .icon(bitmapDescriptorFromVector(requireContext(), R.drawable.map))
                         .title(i.name)
                 )
             }
